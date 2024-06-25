@@ -1,1 +1,0 @@
-CREATE INDEX patient_name ON Patient (name) USING BTREE;
