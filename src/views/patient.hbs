@@ -1,0 +1,58 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="select.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <script>
+    const logout = () => { window.location.href = "http://localhost:3000/logout" };
+  </script>
+</head>
+<div class="header">
+  <div class="header-logo">
+    <div class="logo"><img src="./img/inhaLogo.png" alt="INHA UNIVERSITY" /></div>
+    <span class="logo-text">Hospital</span>
+  </div>
+
+<div class="content">
+  <div class="side">
+    <div class="side-frame">
+      <div class="side-frame_id">
+        <div class="userinfo">{{user}}</div>
+        <button class="logout" onclick="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+  <div class="main">
+    <div class="main-top">
+      <div class="main-top_table">
+        <h1 class="info">{{title}}</h1>
+        <table>
+          <form method="post" action="/patient/add">
+            <label for="deptID">Medical Specialty ID:</label><br>
+            <input type="text" id="deptID" name="MedicalSpecialty_deptID"><br>
+            <label for="reservtime">Reservation Datetime:</label><br>
+            <input type="datetime-local" id="reservtime" name="reservtime"><br>
+            <input type="submit" value="Make Reservation">
+          </form>
+          <tr>
+            <td><b>Reservation Number</b></td>
+            <td><b>Medical Specialty ID</b></td>
+            <td><b>Reservation Datetime</b></td>
+          </tr>
+          {{#each myReservations}}
+          <form method="post">
+            <tr>
+              <td>{{reservnum}}</td>
+              <td>{{MedicalSpecialty_deptid}}</td>
+              <td>{{reservtime}}</td>
+              <td style="border: none; margin-left: 10px;">
+                <button style="margin-left: 10px;" name="{{reservnum}}" type="submit" value="{{reservnum}}" formaction="/patient/cancel">
+                  Cancel
+                </button>
+              </td>
+            </tr>
+          </form>
+          {{/each}}
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

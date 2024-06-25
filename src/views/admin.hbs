@@ -1,0 +1,141 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="admin.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <script>
+    const logout = () => { window.location.href = "http://localhost:3000/logout" };
+  </script>
+</head>
+<div class="header">
+  <div class="header-logo">
+    <div class="logo"><img src="./img/inhaLogo.png" alt="INHA UNIVERSITY" /></div>
+    <span class="logo-text">Hospital</span>
+  </div>
+
+<div class="content">
+  <div class="side">
+    <div class="side-frame">
+      <div class="side-frame_id">
+        <div class="userinfo">{{user}}</div>
+        <button class="logout" onclick="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+  <div class="main">
+    <div class="main-top">
+      <div class="main-top_table">
+        <h1 class="info">{{title1}}</h1>
+        <table>
+          <form method="post" action="/admin/adddoc">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name"><br>
+            <label for="password">Password:</label><br>
+            <input type="text" id="password" name="password"><br>
+            <label for="address">Address:</label><br>
+            <input type="text" id="address" name="address"><br>
+            <label for="phonenum">Phone Number:</label><br>
+            <input type="text" id="phonenum" name="phonenum"><br>
+            <label for="MedicalSpecialty_deptid">Department ID:</label><br>
+            <input type="text" id="MedicalSpecialty_deptid" name="MedicalSpecialty_deptid"><br>
+            <input type="submit" value="Register Doctor">
+          </form>
+          <tr>
+            <td><b>ID</b></td>
+            <td><b>Name</b></td>
+            <td><b>Password</b></td>
+            <td><b>Address</b></td>
+            <td><b>Phone Number</b></td>
+            <td><b>Department ID</b></td>
+            <td><b>Action</b></td>
+          </tr>
+            {{#each doctors}}
+              <tr>
+                <td>{{id}}</td>
+                <td>{{name}}</td>
+                <td>{{password}}</td>
+                <td>{{address}}</td>
+                <td>{{phonenum}}</td>
+                <td>{{MedicalSpecialty_deptid}}</td>
+                <td>
+                    <form method="post" action="/admin/updatedoc">
+                        <label for="name">Name:</label><br>
+                        <input type="text" id="name" name="name" value="{{name}}"><br>
+                        <label for="password">Password:</label><br>
+                        <input type="text" id="password" name="password" value="{{password}}"><br>
+                        <label for="address">Address:</label><br>
+                        <input type="text" id="address" name="address" value="{{address}}"><br>
+                        <label for="phonenum">Phone Number:</label><br>
+                        <input type="text" id="phonenum" name="phonenum" value="{{phonenum}}"><br>
+                        <label for="MedicalSpecialty_deptid">Department ID:</label><br>
+                        <input type="text" id="MedicalSpecialty_deptid" name="MedicalSpecialty_deptid" value="{{MedicalSpecialty_deptid}}"><br>
+                        <input type="hidden" name="id" value="{{id}}">
+                        <button type="submit">Update</button>
+                    </form>
+                </td>
+                <td>
+                    <form method="post" action="/admin/deletedoc">
+                        <input type="hidden" name="id" value="{{id}}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+              </tr>
+            {{/each}}
+          </table>
+          <!-- 간호사 정보 추가 부분 -->
+          <form method="post" action="/admin/addnur">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name"><br>
+            <label for="password">Password:</label><br>
+            <input type="text" id="password" name="password"><br>
+            <label for="address">Address:</label><br>
+            <input type="text" id="address" name="address"><br>
+            <label for="phonenum">Phone Number:</label><br>
+            <input type="text" id="phonenum" name="phonenum"><br>
+            <label for="MedicalSpecialty_deptid">Department ID:</label><br>
+            <input type="text" id="MedicalSpecialty_deptid" name="MedicalSpecialty_deptid"><br>
+            <input type="submit" value="Register Nurse">
+          </form>
+          <tr>
+            <td><b>ID</b></td>
+            <td><b>Name</b></td>
+            <td><b>Password</b></td>
+            <td><b>Address</b></td>
+            <td><b>Phone Number</b></td>
+            <td><b>Department ID</b></td>
+            <td><b>Action</b></td>
+          </tr>
+          {{#each nurses}}
+            <tr>
+              <td>{{id}}</td>
+              <td>{{name}}</td>
+              <td>{{password}}</td>
+              <td>{{address}}</td>
+              <td>{{phonenum}}</td>
+              <td>{{MedicalSpecialty_deptid}}</td>
+              <td>
+                  <form method="post" action="/admin/updatenur">
+                      <label for="name">Name:</label><br>
+                      <input type="text" id="name" name="name" value="{{name}}"><br>
+                      <label for="password">Password:</label><br>
+                      <input type="text" id="password" name="password" value="{{password}}"><br>
+                      <label for="address">Address:</label><br>
+                      <input type="text" id="address" name="address" value="{{address}}"><br>
+                      <label for="phonenum">Phone Number:</label><br>
+                      <input type="text" id="phonenum" name="phonenum" value="{{phonenum}}"><br>
+                      <label for="MedicalSpecialty_deptid">Department ID:</label><br>
+                      <input type="text" id="MedicalSpecialty_deptid" name="MedicalSpecialty_deptid" value="{{MedicalSpecialty_deptid}}"><br>
+                      <input type="hidden" name="id" value="{{id}}">
+                      <button type="submit">Update</button>
+                  </form>
+              </td>
+              <td>
+                  <form method="post" action="/admin/deletenur">
+                      <input type="hidden" name="id" value="{{id}}">
+                      <button type="submit">Delete</button>
+                  </form>
+              </td>
+            </tr>
+          {{/each}}
+      </div>
+    </div>
+  </div>
+</div>

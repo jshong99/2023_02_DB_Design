@@ -1,0 +1,94 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="select.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <script>
+    const logout = () => { window.location.href = "http://localhost:3000/logout" };
+  </script>
+</head>
+<div class="header">
+  <div class="header-logo">
+    <div class="logo"><img src="./img/inhaLogo.png" alt="INHA UNIVERSITY" /></div>
+    <span class="logo-text">Hospital</span>
+  </div>
+
+<div class="content">
+  <div class="side">
+    <div class="side-frame">
+      <div class="side-frame_id">
+        <div class="userinfo">{{user}}</div>
+        <button class="logout" onclick="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+  <div class="main">
+    <div class="main-top">
+      <div class="main-top_table">
+        <h1 class="info">{{title}}</h1>
+
+        <form method="get" action="/nurse/search">
+            <input type="text" id="search" name="search" placeholder="Search patients by name">
+            <button type="submit">Search</button>
+        </form>
+
+        {{#if patients}}
+            <h2>Search Results</h2>
+            {{#each patients}}
+                <div>
+                    <h3>{{this.name}}</h3>
+                    <p>SSN: {{this.ssn}}</p>
+                    <p>Gender: {{this.gender}}</p>
+                    <p>Address: {{this.address}}</p>
+                    <p>Blood Type: {{this.bloodtype}}</p>
+                    <p>Height: {{this.height}}</p>
+                    <p>Weight: {{this.weight}}</p>
+                    <p>Phone Number: {{this.phonenum}}</p>
+                    <p>Doctor ID: {{this.Doctor_id}}</p>
+                    <p>Nurse ID: {{this.Nurse_id}}</p>
+                </div>
+            {{/each}}
+        {{else}}
+
+          <table>
+            <form method="post" action="/nurse/add">
+              <label for="Patient_id">Patient ID:</label><br>
+              <input type="text" id="Patient_id" name="Patient_id"><br>
+              <label for="treatmenttime">Treatment Datetime:</label><br>
+              <input type="datetime-local" id="treatmenttime" name="treatmenttime"><br>
+              <label for="treatmentdetails">Treatment Details:</label><br>
+              <input type="text" id="treatmentdetails" name="treatmentdetails"><br>
+              <input type="submit" value="Enroll Treatment">
+            </form>
+            <tr>
+              <td><b>Patient ID</b></td>
+              <td><b>Treatment Datetime</b></td>
+              <td><b>Treatment Details</b></td>
+              <td><b>Action</b></td>
+            </tr>
+            {{#each myTreatments}}
+              <tr>
+                  <td>{{Patient_id}}</td>
+                  <td>{{treatmenttime}}</td>
+                  <td>
+                      <form method="post" action="/nurse/update">
+                          <input type="text" id="tdetails-{{Patient_id}}" name="tdetails" value="{{treatmentdetails}}">
+                          <input type="hidden" name="Patient_id" value="{{Patient_id}}">
+                          <input type="hidden" name="treatmenttime" value="{{treatmenttime}}">
+                          <button type="submit">Update</button>
+                      </form>
+                  </td>
+                  <td>
+                      <form method="post" action="/nurse/delete">
+                          <input type="hidden" name="Patient_id" value="{{Patient_id}}">
+                          <button name="treatmenttime" type="submit" value="{{treatmenttime}}">
+                              Delete
+                          </button>
+                      </form>
+                  </td>
+              </tr>
+            {{/each}}
+          </table>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>
